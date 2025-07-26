@@ -1,5 +1,5 @@
 import { questions } from '@/config/database/schema'; 
-import { db } from '@/config/database/index';
+import { db } from '@/config/database/server';
 import {  and, eq } from 'drizzle-orm';
 
 export async function saveQuestions(

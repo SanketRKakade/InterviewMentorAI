@@ -1,4 +1,4 @@
-import { db } from "@/config/database";
+import { db } from "@/config/database/server";
 import { questions, resumes } from "@/config/database/schema";
 import { eq } from "drizzle-orm";
 

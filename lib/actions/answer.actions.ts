@@ -1,4 +1,4 @@
-import { db } from "@/config/database";
+import { db } from "@/config/database/server";
 import { correctAnswers, suggestions, userAnswers } from "@/config/database/schema";
 import { eq, asc } from "drizzle-orm";
 

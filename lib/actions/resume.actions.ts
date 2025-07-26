@@ -1,4 +1,4 @@
-import { db } from '@/config/database';
+import { db } from '@/config/database/server';
 import { projects, resumes } from '@/config/database/schema'; // Adjust path to your schema
 
 export async function saveResume(resumeData: ResumeData,userId:string): Promise<any> {

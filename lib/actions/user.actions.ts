@@ -2,7 +2,7 @@
 
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { db } from "../../config/database"; 
+import { db } from "../../config/database/server"; 
 import { users } from "../../config/database/schema"; 
 import { handleError } from "../utils";
 
