@@ -1,5 +1,5 @@
 {
-  "name": "realinterviewmentorai",
+  "name": "interviewmentorai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,7 +13,7 @@
   "dependencies": {
     "@clerk/nextjs": "^5.2.3",
     "@google/generative-ai": "^0.14.1",
-    "@neondatabase/serverless": "^0.9.4",
+    "@neondatabase/serverless": "^0.9.5",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",

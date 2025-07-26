@@ -65,8 +65,8 @@ To set up the InterviewMentorAI application locally for development purposes, fo
      NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
      WEBHOOK_SECRET=
      
-     NEXT_PUBLIC_GEMINI_API_KEY=
-     NEXT_PUBLIC_DRIZZLE_DATABASE_URL=
+     GEMINI_API_KEY=
+     DRIZZLE_DATABASE_URL=
 
 5. **Run the application:**
    ```bash
