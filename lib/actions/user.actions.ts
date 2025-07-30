@@ -10,12 +10,14 @@ import { handleError } from "../utils";
 export async function createUser(user: CreateUserParams) {
   try {
     const newUser = await db.insert(users).values(user).returning();
-    console.log(newUser);
-    return newUser[0]; // Assuming the returning clause returns an array
+    console.log("✅ DB insert success:", newUser);
+    return newUser[0];
   } catch (error) {
-    handleError(error);
+    console.error("🔥 DB insert error:", error);
+    throw error; // <-- don’t swallow errors
   }
 }
+
 
 // READ
 export async function getUserById(userId: string) {

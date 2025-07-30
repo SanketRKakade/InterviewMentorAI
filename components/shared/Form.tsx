@@ -147,12 +147,25 @@ const Form: React.FC<FormProps> = ({ resumeData }) => {
     Please include problem-solving approaches similar to those found on platforms like LeetCode, and questions available on other platforms.`
       );
     const parsedData = result.response.text();
-    console.log("Question : ",parsedData);
-    await saveQuestions(JSON.parse(parsedData), resumeId, sessionId,difficulty,userId || "");
-   //console.log('Questions:',ResponseForSavedQuestion);
-   console.log('Questions:', parsedData);
-   setIsLoading(false);
-   route.push(`/interview/${sessionId}`);
+    console.log("Question : ", parsedData);
+    let questions;
+    try {
+      questions = JSON.parse(parsedData);
+    } catch (e) {
+      console.error("Failed to parse questions from AI:", parsedData);
+      setIsLoading(false);
+      alert("Failed to parse questions. Please try again.");
+      return;
+    }
+    // Ensure we always send { interviewQuestions: [...] }
+    const questionsPayload = Array.isArray(questions)
+      ? { interviewQuestions: questions }
+      : questions;
+    await saveQuestions(questionsPayload, resumeId, sessionId, difficulty, userId || "");
+    //console.log('Questions:',ResponseForSavedQuestion);
+    console.log('Questions:', questionsPayload);
+    setIsLoading(false);
+    route.push(`/interview/${sessionId}`);
   };
 
   return (

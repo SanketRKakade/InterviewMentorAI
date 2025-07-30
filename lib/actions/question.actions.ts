@@ -24,13 +24,23 @@ export async function saveQuestions(
     // Add other necessary fields from question object if needed
   }));
 
-  await db.insert(questions).values({
+  console.log("[saveQuestions] Inserting questions:", {
+    resumeId,
+    sessionId,
+    userId,
+    questions: questionsArray,
+    difficulty,
+  });
+
+  const result = await db.insert(questions).values({
     resumeId,
     sessionId,
     userId,
     questions: questionsArray,
     difficulty,
   }).returning();
+
+  console.log("[saveQuestions] Insert result:", result);
 
   return questionsArray; // Return the saved questions
 }

@@ -47,26 +47,55 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
+  // if (eventType === "user.created") {
+  //   const { id, email_addresses } = evt.data;
+
+  //   const user = {
+  //     id: id,
+  //     email: email_addresses[0].email_address,
+  //   };
+
+  //   const newUser = await createUser(user);
+
+  //   if (newUser) {
+  //     await clerkClient.users.updateUserMetadata(id, {
+  //       publicMetadata: {
+  //         userId: newUser.id,
+  //       },
+  //     });
+  //   }
+
+  //   return NextResponse.json({ message: "OK", user: newUser });
+  // }
+
   if (eventType === "user.created") {
-    const { id, email_addresses } = evt.data;
+  console.log("📥 Clerk user.created webhook received:", evt.data);
 
-    const user = {
-      id: id,
-      email: email_addresses[0].email_address,
-    };
+  const { id, email_addresses } = evt.data;
 
-    const newUser = await createUser(user);
+  const user = {
+    id: id,
+    email: email_addresses[0]?.email_address || "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  };
 
-    if (newUser) {
-      await clerkClient.users.updateUserMetadata(id, {
-        publicMetadata: {
-          userId: newUser.id,
-        },
-      });
-    }
+  console.log("📝 Attempting to insert user into Neon DB:", user);
 
-    return NextResponse.json({ message: "OK", user: newUser });
+  const newUser = await createUser(user);
+
+  console.log("✅ Insert response from DB:", newUser);
+
+  if (newUser) {
+    await clerkClient.users.updateUserMetadata(id, {
+      publicMetadata: { userId: newUser.id },
+    });
   }
+
+  return NextResponse.json({ message: "User created and stored in DB", user: newUser });
+}
+
+
 
   if (eventType === "user.updated") {
     const { id, first_name, last_name, username, image_url } = evt.data;
